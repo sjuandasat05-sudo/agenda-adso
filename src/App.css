@@ -1,0 +1,37 @@
+:root {
+  --morado: #7c3aed;
+  --morado-oscuro: #5b21b6;
+  --gris: #f5f5f7;
+  --borde: #d1d5db;
+  --radio: 10px;
+}
+
+body {
+  background: var(--gris);
+  font-family: system-ui;
+}
+
+.app-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.card {
+  background: #fff;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: var(--radio);
+  border: 1px solid var(--borde);
+}
+
+.btn-agregar {
+  background: var(--morado);
+  color: white;
+}
+
+.btn-eliminar {
+  background: #dc2626;
+  color: white;
+}

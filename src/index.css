@@ -1,0 +1,12 @@
+/* Habilita las capas base, componentes y utilidades de Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos base globales para toda la app */
+body {
+  /* Fondo gris claro, tipografía sans, color de texto base */
+  @apply bg-gray-50 text-gray-800 font-sans;
+}
+
+
