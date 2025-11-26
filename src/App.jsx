@@ -6,6 +6,17 @@
 // - Conectar el formulario y las tarjetas de contactos.
 
 // Importamos hooks de React
+// Estado para el término de búsqueda digitado por el usuario
+// Estado para el término de búsqueda digitado por el usuario
+// Archivo: src/App.jsx
+// Componente principal de la aplicación Agenda ADSO.
+// Se encarga de:
+// - Cargar la lista de contactos desde la API (JSON Server).
+// - Manejar estados globales (contactos, carga, error).
+// - Conectar el formulario, el buscador y las tarjetas de contactos.
+// - Aplicar búsqueda y ordenamiento sobre la lista de contactos.
+
+// Importamos hooks de React
 import { useEffect, useState } from "react";
 
 // Importamos las funciones de la API (capa de datos)
@@ -31,6 +42,16 @@ function App() {
 
   // Estado para guardar mensajes de error generales de la aplicación
   const [error, setError] = useState("");
+
+  // === NUEVOS ESTADOS PARA LA CLASE 10 ===
+
+  // Estado para el término de búsqueda digitado por el usuario
+  const [busqueda, setBusqueda] = useState("");
+
+  // Estado para el orden de los contactos:
+  // true  = orden alfabético ascendente (A-Z)
+  // false = orden alfabético descendente (Z-A)
+  const [ordenAsc, setOrdenAsc] = useState(true);
 
   // useEffect que se ejecuta una sola vez al montar el componente.
   // Aquí cargamos los contactos iniciales desde JSON Server (GET).
@@ -102,6 +123,43 @@ function App() {
     }
   };
 
+  // === LÓGICA DE BÚSQUEDA Y ORDENAMIENTO (CLASE 10) ===
+
+  // 1. Filtramos la lista original según el término de búsqueda
+  const contactosFiltrados = contactos.filter((c) => {
+    // Convertimos el término de búsqueda a minúsculas
+    const termino = busqueda.toLowerCase();
+
+    // Normalizamos los campos del contacto a minúsculas
+    const nombre = c.nombre.toLowerCase();
+    const correo = c.correo.toLowerCase();
+    // etiqueta puede ser undefined, por eso usamos (c.etiqueta || "")
+    const etiqueta = (c.etiqueta || "").toLowerCase();
+
+    // Incluimos el contacto si el término aparece en alguno de estos campos
+    return (
+      nombre.includes(termino) ||
+      correo.includes(termino) ||
+      etiqueta.includes(termino)
+    );
+  });
+
+  // 2. Ordenamos los contactos filtrados por nombre
+  const contactosOrdenados = [...contactosFiltrados].sort((a, b) => {
+    // Pasamos los nombres a minúsculas para comparar sin problemas
+    const nombreA = a.nombre.toLowerCase();
+    const nombreB = b.nombre.toLowerCase();
+
+    if (nombreA < nombreB) {
+      // Si ordenAsc es true, A va antes que B; si es false, al revés
+      return ordenAsc ? -1 : 1;
+    }
+    if (nombreA > nombreB) {
+      return ordenAsc ? 1 : -1;
+    }
+    return 0; // Si son iguales, no cambia el orden
+  });
+
   // JSX que renderiza toda la aplicación
   return (
     <div className="min-h-screen bg-gray-50">
@@ -135,17 +193,38 @@ function App() {
             {/* Formulario para crear nuevos contactos */}
             <FormularioContacto onAgregar={onAgregarContacto} />
 
-            {/* Listado de contactos */}
+            {/* === NUEVO: Buscador y botón de orden (CLASE 10) === */}
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+              {/* Input de búsqueda controlado */}
+              <input
+                type="text"
+                className="w-full md:flex-1 rounded-xl border-gray-300 focus:ring-purple-500 focus:border-purple-500 text-sm"
+                placeholder="Buscar por nombre, correo o etiqueta..."
+                value={busqueda} // Valor viene del estado busqueda
+                onChange={(e) => setBusqueda(e.target.value)} // Actualiza el estado
+              />
+
+              {/* Botón para alternar el orden A-Z / Z-A */}
+              <button
+                type="button"
+                onClick={() => setOrdenAsc((prev) => !prev)}
+                className="bg-gray-100 text-gray-700 text-sm px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-200"
+              >
+                {/* Texto dinámico según el estado ordenAsc */}
+                {ordenAsc ? "Ordenar Z-A" : "Ordenar A-Z"}
+              </button>
+            </div>
+
+            {/* Listado de contactos (usa contactosOrdenados) */}
             <section className="space-y-4">
-              {contactos.length === 0 ? (
-                // Mensaje cuando no existen contactos aún
+              {contactosOrdenados.length === 0 ? (
+                // Mensaje cuando el filtro no encuentra resultados
                 <p className="text-sm text-gray-500">
-                  Aún no tienes contactos registrados. Agrega el primero usando
-                  el formulario superior.
+                  No se encontraron contactos que coincidan con la búsqueda.
                 </p>
               ) : (
-                // Recorremos la lista de contactos y mostramos una tarjeta por cada uno
-                contactos.map((c) => (
+                // Recorremos la lista de contactos ya filtrados y ordenados
+                contactosOrdenados.map((c) => (
                   <ContactoCard
                     key={c.id} // Key única para cada elemento de la lista
                     nombre={c.nombre}
@@ -173,3 +252,4 @@ function App() {
 
 // Exportamos el componente principal
 export default App;
+
