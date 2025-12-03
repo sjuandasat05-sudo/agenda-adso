@@ -343,7 +343,7 @@ function App() {
           {/* COLUMNA DERECHA: Panel lateral PRO (igual en ambas vistas) */}
           <aside className="space-y-4 md:space-y-5">
             {/* Banner morado principal */}
-            <div className="rounded-3xl bg-gradient-to-br from-purple-600 to-purple-800 text-white p-6 shadow-xl flex flex-col justify-between min-h-[220px]">
+            <div className="rounded-3xl bg-gradient-to-br from-purple-600 to-orange-800 text-blue-700 p-6 shadow-xl flex flex-col justify-between min-h-[220px]">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.3em] text-purple-100/80">
                   Proyecto ABP
@@ -351,34 +351,32 @@ function App() {
                 <h2 className="text-lg font-bold mt-2">
                   Agenda ADSO – Dashboard
                 </h2>
-                <p className="text-sm text-purple-100 mt-1">
-                  CRUD completo con React, JSON Server, validaciones,
-                  búsqueda, ordenamiento y edición.
+                <p className="text-sm  text-yellow-600 mt-1">
+                  Bienvenidos al React de Juan David ST
                 </p>
               </div>
 
               <div className="mt-6 space-y-2 text-sm">
                 <p className="flex items-center justify-between">
-                  <span className="text-purple-100">
+                  <span className="text-yellow-400">
                     Contactos registrados
                   </span>
                   <span className="font-semibold text-white text-base">
                     {contactos.length}
                   </span>
                 </p>
-                <p className="text-[11px] text-purple-100/80">
-                  Usa este proyecto como evidencia en tu portafolio de
-                  Desarrollo Web – ReactJS.
+                <p className="text-[11px] text-gray-400">
+                 Este es el hermoso mundo de la programacion
                 </p>
               </div>
             </div>
 
             {/* Tarjeta de tips de código */}
-            <div className="rounded-2xl bg-white/90 border border-slate-100 p-4 shadow-sm">
+            <div className="rounded-2xl bg-purple-700 border border-slate-100 p-4 shadow-sm">
               <h3 className="text-sm font-semibold text-gray-900">
                 Tips de código limpio
               </h3>
-              <ul className="mt-2 text-xs text-gray-600 space-y-1">
+              <ul className="mt-2 text-xs text-black space-y-1">
                 <li>• Nombra componentes según su responsabilidad.</li>
                 <li>• Evita duplicar lógica, extrae funciones reutilizables.</li>
                 <li>• Comenta la intención, no cada línea obvia.</li>
@@ -387,14 +385,14 @@ function App() {
             </div>
 
             {/* Tarjeta SENA / motivacional */}
-            <div className="rounded-2xl bg-slate-900 border border-slate-700 p-4 text-slate-100 shadow-sm">
+            <div className="rounded-2xl bg-red-800 border border-slate-700 p-4 text-slate-100 shadow-sm">
               <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400">
                 SENA CTMA · ADSO
               </p>
               <p className="text-sm font-semibold mt-2">
                 Desarrollo Web – ReactJS
               </p>
-              <p className="text-xs text-slate-400 mt-3">
+              <p className="text-xs text-orange-600 mt-3">
                 “Pequeños proyectos bien cuidados valen más que mil ideas sin
                 código. Agenda ADSO es tu carta de presentación como
                 desarrollador.”
