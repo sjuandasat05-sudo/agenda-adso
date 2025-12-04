@@ -3,7 +3,7 @@
 
 // URL base del backend local de Agenda ADSO.
 // Si cambia el puerto o la ruta, solo se modifica aquí.
-export const API_BASE_URL = "https://agenda-adso-api-elne.onrender.com/contactos";
+export const API_BASE_URL = "https://agenda-adso-api-elne.onrender.com";
 
 // Información general de la aplicación que se utilizará en App.jsx
 export const APP_INFO = {
